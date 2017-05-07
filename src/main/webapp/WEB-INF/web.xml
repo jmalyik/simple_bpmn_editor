@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>Simple BPMN editor Web Application</display-name>
+
+	<!-- To load the Spring context -->
+	<listener>
+		<listener-class>org.activiti.explorer.servlet.WebConfigurer</listener-class>
+	</listener>
+
+	<!-- To allow session-scoped beans in Spring -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+  
+    <filter>
+        <filter-name>JSONPFilter</filter-name>
+        <filter-class>org.activiti.explorer.servlet.JsonpCallbackFilter</filter-class>
+    </filter>
+  
+    <filter-mapping>
+        <filter-name>JSONPFilter</filter-name>
+        <url-pattern>/service/*</url-pattern>
+    </filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- Session timeout on one day -->
+	<session-config>
+		<session-timeout>480</session-timeout>
+	</session-config>
+  
+
+
+</web-app>
